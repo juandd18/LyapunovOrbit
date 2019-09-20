@@ -52,9 +52,9 @@ L =  384400; %Moon-Earth Distance, km
 hold on
 plot(L1,0,'r*')
 plot((XFinal(:,1)), XFinal(:,2))
-title('Periodic Lyapunov Orbit (Close Up)');
-xlabel('X [km]');
-ylabel('Y [km]');
+title('Periodic Lyapunov Orbit');
+xlabel('X ');
+ylabel('Y ');
 grid on;
 
 
