@@ -18,25 +18,27 @@ X0 = [Xguess STM]';
 %   cuando cambio de signo y)
 ode_options = odeset('Events',@limitCriteria,'RelTol',1e-15,'AbsTol',1e-15);
 
-deltaVec = [100; 100];
+limit_criteria = 100;
 counter = 0;
-while abs(norm(deltaVec)) > 1e-14
+while abs(limit_criteria) > 1e-11
     counter = counter+1;
     [t,X_halfOrbit] = ode113(@CRTBPLyapunov, [0 Inf], X0, ode_options, mu);
     
     % Get stm matrix from input and reshape 4x4
     stm = reshape(X_halfOrbit(end,5:end),4,[]);
         
-    updateTerm = stm(4,3) - (X_halfOrbit(end,3)/X_halfOrbit(end,4))*stm(2,4);
+    updateTerm = stm(3,4) - (1/X_halfOrbit(end,4))*stm(2,4);
 
-    deltaVec = inv(updateTerm)*X_halfOrbit(end,3);
+    deltaVec = (1/updateTerm)*X_halfOrbit(end,3)
     
-    deltaVx = [0, 0, deltaVec, 0];
+    
+    deltaVy = [0, 0, 0, deltaVec];
     
     fprintf('Iteration counter: %d\n', counter)
-    abs(norm(deltaVec))
-
-    X0(1:4) = X0(1:4) - deltaVx';
+    
+    limit_criteria = X_halfOrbit(end,3)
+    
+    X0(1:4) = X0(1:4) - deltaVy';
     if counter > maxIter
         break
     end 
@@ -51,10 +53,10 @@ L =  384400; %Moon-Earth Distance, km
 
 hold on
 plot(L1,0,'r*')
-plot((XFinal(:,1)), XFinal(:,2))
-title('Periodic Lyapunov Orbit');
-xlabel('X ');
-ylabel('Y ');
+plot((XFinal(:,1))+2*Ax, XFinal(:,2))
+title('Periodic Lyapunov Orbit (Close Up)');
+xlabel('X [km]');
+ylabel('Y [km]');
 grid on;
 
 
