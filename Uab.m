@@ -1,7 +1,7 @@
 function matrix = Uab(mu,x,y,z)
 %Uab returns matrix 
 %   Uab is the symmetric matrix composed of second partial derivatives of U with 
-%   respect to the third bodyâ€™s position evaluated along the orbit
+%   respect to the third body’s position evaluated along the orbit
 
 d = sqrt((x+mu)^2+y^2+z^2);
 r = sqrt((x - 1 + mu)^2+y^2+z^2);

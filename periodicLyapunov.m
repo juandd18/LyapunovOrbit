@@ -1,4 +1,4 @@
-function [t_halfPeriod,X_newVy] = periodicLyapunov(maxIter,maxIter2)
+function [t_halfPeriod,Xtemp] = periodicLyapunov(maxIter,maxIter2)
 %periodicLyapunov calculate the periodic lyapunov orbit
 
 mMoon =7.348e22;% kg
@@ -6,41 +6,43 @@ mEarth = 5.9742e24; %kg
 mu = mMoon/(mMoon + mEarth)
 
 [L1,L2,L3,L4x,L4y,L5x,L5y] = LibrationPoints(mu);
-Ax=0.00001;
+L1 = -L1 %0.8369151324;
+Ax=1e-3;
 %get an aprox. of the initial points lyapunov orbit
-[Xguess, Vy_guess ] = initialPositionLyapunov(mu,-1*L1,Ax);
-counter = 0;
-while Ax < 0.1
+%L1=-0.8369151324;
+[Xguess, Vy_guess ] = initialPositionLyapunov(mu,L1,Ax);
+counter_1 = 0;
+while Ax < 0.4
     
-[t_halfPeriod,X_newVy] = singleShootingLyapunov(mu,maxIter,Xguess, Vy_guess);
-Vy_guess = X_newVy;
+[t_halfPeriod,X_outVy,X_outX] = singleShootingLyapunov(mu,maxIter,Xguess, Vy_guess);
+Vy_guess = X_outVy
 Ax = Ax + 0.001
-Xguess = -1*L1 - Ax;
+Xguess = L1 - Ax
 
-counter=counter+1;
-fprintf('Iteration counter: %d\n', counter)
+counter_1=counter_1+1;
+fprintf('Iteration counter_1: %d\n', counter_1)
 
     
-if counter > maxIter2
+if counter_1 > maxIter2
     break
 end
 
 end
 
- Xtemp = [Xguess,0,0,Vy_guess]
-       ode_options = odeset('RelTol',1e-9,'AbsTol',1e-9);
-        [tFinal, XFinal] = ode113(@CRTBPLyapunov, [0 t_halfPeriod*2], Xtemp, ode_options, mu); 
+tiempo = t_halfPeriod(end)*2
+Xtemp = [X_outX,0,0,Vy_guess]
+ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
+[tFinal, XFinal] = ode113(@CRTBPForward, [0 t_halfPeriod(end)*2],Xtemp , ode__opt, mu); 
 
+L =  384400; %Moon-Earth Distance, km
 
-        L =  384400; %Moon-Earth Distance, km
-
-        hold on
-        plot(-L1,0,'r*')
-        plot((XFinal(:,1))+2*Ax, XFinal(:,2))
-        title('Periodic Lyapunov Orbit (Close Up)');
-        xlabel('X [km]');
-        ylabel('Y [km]');
-        grid on;
+hold on
+plot(L1,0,'r*')
+plot(XFinal(:,1), XFinal(:,2))
+title('Periodic Lyapunov Orbit (Close Up)');
+xlabel('X ');
+ylabel('Y ');
+grid on;
 
 
 end

@@ -26,12 +26,12 @@ lowerLeft = Uab(mu,x,y,0);
 A = [upperLeft upperRight; lowerLeft lowerRight];
 
 %% find STM + t matrix.
-stm = reshape(vect(5:end), 4,[]);
-stm_1 = A * stm;
+stm = reshape(vect(5:end), 4,[])';
+stm_mult = A * stm;
 % Reshape to vector. 
-stm_1_vect = reshape(stm_1,1,[]);
+stm_mult_vect = reshape(stm_mult',1,[]);
 
-vectOutput = [xVel yVel xAce yAce stm_1_vect]';
+vectOutput = [xVel yVel xAce yAce stm_mult_vect]';
 
 end
 

@@ -70,6 +70,7 @@ mat(4,4) = 0.0d0;
 
 zder=reshape(z(5:20),4,4)';
 
+
 prod=(mat * zder);
 dzp=reshape( prod' , 1,16);
 
