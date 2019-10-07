@@ -1,6 +1,6 @@
-function [t_halfPeriod,X_newVy,X_newX] = singleShootingLyapunovV1(mu,maxIter,X_init,Vy_guess,Ax,L1)
+function [t_halfPeriod,X_newVy,X_newX] = singleShootingLyapunovV1(mu,maxIter,X_init,Vy_guess)
 %singleShooting applied the method of single shooting
-%   to find a periodic trajectory (Lyapunov orbit)
+%   to find a periodic trajectory (Lyapunov orbit) over L2
 
 STM = reshape(eye(4),16,[])';
 Xguess = [X_init 0 0 Vy_guess];
@@ -23,6 +23,7 @@ while abs(limit_criteria) > 1e-14
         
     updateTerm = stm(3,4) - (1/X_halfOrbit(end,4))*stm(2,4);
 
+    %PARTE DIFERENTE
     deltaVec =  abs((1/updateTerm)*X_halfOrbit(end,3));
     
     
@@ -45,23 +46,6 @@ while abs(limit_criteria) > 1e-14
     end 
         
 end
-
-%vector_test = X_halfOrbit(end,1:4)
-
-%test_X0 = X_halfOrbit(end,1:4)
-%tiempo = t_halfPeriod(end)*2
-%ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
-%[tFinal, XFinal] = ode113(@CRTBPForward, [0 t_halfPeriod(end)*2],X_halfOrbit(end,1:4) , ode__opt, mu); 
-
-L =  384400; %Moon-Earth Distance, km
-
-%hold on
-%plot(L1,0,'r*')
-%plot(XFinal(:,1), XFinal(:,2))
-%title('Periodic Lyapunov Orbit (Close Up)');
-%xlabel('X ');
-%ylabel('Y ');
-%grid on;
 
 end
 
