@@ -1,4 +1,4 @@
-function X_mainfold = calculateStableMainfold(periodo,X,mu,k,num_steps)
+function X_mainfold = calculateStableMainfold(periodo,X,mu,k,num_steps,plotGraph)
 %calculateStableMainfold calcula el stable mainfold de una orbita
 %periodioca en este case lyapunov pero podria ser otra, se toma k puntos
 %para partir la orbita luego se calcula la matrix monodromy
@@ -31,17 +31,20 @@ end
 %% calcular stable mainfold orbit para cada intervalo
 epsilon=1e-6;
 for n=2:k
-   %ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
-   %[t, X_n] = ode113(@CRTBPLyapunov, [0 orbitTimes(n)],X , ode__opt, mu);
+   ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
+   [t, X_n] = ode113(@CRTBPLyapunov, [0 orbitTimes(n)],X , ode__opt, mu);
    
-   %mono_n = reshape(X_n(end,5:end),4,[]);
-   perturbationVector = mono*stableVector;
-   %perturbationVector = mono_n*stableVector;
+   mono_n = reshape(X_n(end,5:end),4,[]);
+   %perturbationVector = mono*stableVector;
+   perturbationVector = mono_n*stableVector;
    norm_perturbation = perturbationVector/norm(perturbationVector);
    X_mainfold(n,1:4) = orbitPoint(n,1:4)'+epsilon*norm_perturbation;
 end
 
-plotStableMainfold(X_mainfold,periodo,k,mu)
+%if plotGraph is true we plot it
+if(plotGraph)
+plotUnStableMainfold(X_mainfold,periodo,k,mu)
+end
 
 
 end

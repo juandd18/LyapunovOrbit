@@ -1,0 +1,18 @@
+function [U2,U3] = callPoincareMap(Xunstable,mu,k,periodo,tLimit)
+%UNTITLED Summary of this function goes here
+%   passIterates: cuantos intersecciones en el poincare map
+
+%% unstable manifold
+X_mainfold = calculateUnStableMainfold(periodo,Xunstable,mu,k,100,false);
+
+[U2,U3] = poincareMap(@CRTBPfOR,X_mainfold,k,mu)
+
+%% plot poincare
+hold on
+plot(U2(:,1), U2(:,2),'.')
+xlabel('y')
+ylabel('Vy')
+%plot(U3(:,1), U3(:,2),'*')
+
+end
+

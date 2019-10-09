@@ -1,12 +1,6 @@
-function [U2,U3] = poincareMap(Xunstable,mu,k,periodo,tLimit)
-%UNTITLED Summary of this function goes here
-%   passIterates: cuantos intersecciones en el poincare map
-
-%% parameters
-poincare_x = 1-mu;
-
-%% unstable manifold
-X_mainfold = calculateUnStableMainfold(periodo,Xunstable,mu,k,100,false);
+function [U2,U3] = poincareMap(function_name,X_mainfold,k,tLimit,mu)
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
 
 %% poincare map
 %U2 poincare section with y,Vy
@@ -15,11 +9,12 @@ U2_counter = 1;
 %U3 poincare section with y,Vy
 U3 = zeros(500,2);
 U3_counter = 1;
+
 for n=1:k
     
     x0=X_mainfold(n,1:4)';
     options=odeset('RelTol',1e-13,'AbsTol',1e-13);
-    [t,X]=ode113(@CRTBPForward,[0 tLimit],x0,options,mu);
+    [t,X]=ode113(function_name,[0 tLimit],x0,options,mu);
     %get size of X
     temp=size(X);
     
@@ -45,12 +40,6 @@ for n=1:k
 
 end
 
-%% plot poincare
-hold on
-plot(U2(:,1), U2(:,2),'.')
-xlabel('y')
-ylabel('Vy')
-%plot(U3(:,1), U3(:,2),'*')
 
 end
 
