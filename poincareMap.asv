@@ -1,0 +1,50 @@
+function [U2,U3] = poincareMap(Xunstable,mu,k,periodo,tLimit)
+%UNTITLED Summary of this function goes here
+%   passIterates: cuantos intersecciones en el poincare map
+
+%% parameters
+poincare_x = 1-mu;
+
+%% unstable manifold
+X_mainfold = calculateUnStableMainfold(periodo,Xunstable,mu,k,200,true);
+
+%% poincare map
+%U2 poincare section with y,Vy
+U2 = zeros(k,2);
+%U3 poincare section with y,Vy
+U3 = zeros(k,2);
+for n=1:k
+    
+    x0=X_mainfold(n,1:4)';
+    options=odeset('RelTol',2.5e-13,'AbsTol',1e-22);
+    [t,X]=ode113(@CRTBPForward,[0 periodo*4],x0,options,mu);
+    
+    %get the length
+       temp=size(trajectory_n);
+       numSteps=temp(1,1);  
+    
+    for i=1:
+    %poincare section U2 pag 114 Koon
+    % x = 1-mu; y < 0; Vx > 0
+    
+    if( (X(n-1,1) == (1-mu)) & (X(n,2) < 0) & (X(n,3) > 0))
+        U2(n,1) = X(n,2);
+        U2(n,2) = X(n,4);
+    end
+    
+    %poincare section U3 pag 114 Koon
+    % x = 1-mu; y > 0; Vx < 0
+    if( (X(n-1,1) == (1-mu)) & (X(n,2) > 0) & (X(n,3) < 0))
+        
+        U3(n,1) = X(n,2);
+        U3(n,2) = X(n,4);
+    end
+end
+
+%% plot poincare
+
+plot(U2(:,1), U2(:,2),'.')
+%plot(U3(:,1), U3(:,2),'*')
+
+end
+
