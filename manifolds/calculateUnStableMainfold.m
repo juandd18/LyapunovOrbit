@@ -1,4 +1,4 @@
-function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,num_steps,plotGraph)
+function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,epsilon,plotGraph)
 %calculateStableMainfold calcula el stable mainfold de una orbita
 %periodioca en este case lyapunov pero podria ser otra, se toma k puntos
 %para partir la orbita luego se calcula la matrix monodromy
@@ -10,6 +10,8 @@ function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,num_steps,plotGra
 %% generar la orbita periodica
 ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
 [t, X_periodica] = ode113(@CRTBPLyapunov, [0 periodo],X , ode__opt, mu); 
+num_steps = size(X_periodica,1);
+
 
 %% obtener la monodromy matrix 
 mono = reshape(X_periodica(end,5:end),4,[]);
@@ -19,25 +21,28 @@ mono = reshape(X_periodica(end,5:end),4,[]);
 mono_eigValues=diag(mono_eigVal);
 % en matlab organiza mono_eigVectors de acuerdo a la magnitud de los 
 %eigenvalues por esto el unstable vector esta en la primera posicion
-stableVector = mono_eigVectors(1:4,1);
+UnstableVector = mono_eigVectors(1:4,1);
 
 %% dividir la orbita periodica en k posiciones
-h=round((num_steps-1)/k);
+% cambiar num_steps por numero filas de X_periodica
+h=round((num_steps)/k);
 for n=1:k
-   orbitPoint(n,1:4)= X_periodica((n-1)*h+1,1:4);
-   orbitTimes(n)=t((n-1)*h+1);
+   if ((n-1)*h+1) > num_steps
+       index = num_steps;
+   else
+       index = (n-1)*h+1;
+   end
+   orbitPoint(n,1:4)= X_periodica(index,1:4);
+   orbitTimes(n)=t(index);
 end
 
 %% calcular stable mainfold orbit para cada intervalo
-epsilon=1e-6;
-for n=2:k
-   %ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
-   %[t, X_n] = ode113(@CRTBPLyapunov, [0 orbitTimes(n)],X , ode__opt, mu);
-   
-   %mono_n = reshape(X_n(end,5:end),4,[]);
-   perturbationVector = mono*stableVector;
-   %perturbationVector = mono_n*stableVector;
-   norm_perturbation = perturbationVector/norm(perturbationVector);
+norm_perturbation =  UnstableVector/norm(UnstableVector);
+X_mainfold(1,1:4) = orbitPoint(1,1:4)'+epsilon*norm_perturbation;
+
+%para comprobar que esta bien
+%cambiar el epsilon por la mitad la segunda vez
+for n=2:k  
    X_mainfold(n,1:4) = orbitPoint(n,1:4)'+epsilon*norm_perturbation;
 end
 

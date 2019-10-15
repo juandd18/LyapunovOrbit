@@ -14,13 +14,15 @@ for n=1:k
     
     x0=X_mainfold(n,1:4)';
     options=odeset('RelTol',1e-13,'AbsTol',1e-13);
+    % añadir para parar cuando x = 1-mu  
     [t,X]=ode113(function_name,[0 tLimit],x0,options,mu);
     %get size of X
     temp=size(X);
     
+    % iterar hasta 4
     for i=2:temp(1,1)
         %poincare section U2 pag 114 Koon
-        % x = 1-mu; y < 0; Vx > 0
+        %  y < 0; Vx > 0
         if( (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) < 0) & (X(i,3) > 0))
             %fprintf('toco surface: %d\n', 1)
             U2(U2_counter,1) = X(i,2);
