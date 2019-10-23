@@ -8,7 +8,7 @@ X0 = [Xguess STM]';
 
 
 % Stop integrating when y=0 
-ode_options = odeset('Events',@limitCriteria,'RelTol',1e-13,'AbsTol',1e-13);
+ode_options = odeset('Events',@limitCriteria,'RelTol',1e-13,'AbsTol',1e-16);
 
 limit_criteria = 100;
 counter = 0;

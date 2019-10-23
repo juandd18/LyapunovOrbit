@@ -1,4 +1,4 @@
-clear
+
 %el primer parametro es el limite de iteraciones para el
 %singleShottingLyapunov.m 
 %el segundo parametro es el limite de iteraciones para el
@@ -20,12 +20,12 @@ Ax=1e-4;
 %[tFinalL1, XFinalL1,newAxL1] = periodicLyapunov(25,52,mu,L,Ax,1e-3,false);
 
 list_C_Ax_posicion_L1 = zeros(1,7);
-for i = 60:105
-    [tPeriodoL1, XFinalL1,newAx] = periodicLyapunov(25,i,mu,L,Ax,5e-4,false);
-    C = jacobiConstant( XFinalL1(1,1:2),XFinalL1(1,3:4),mu);
-    row = [newAx C tPeriodoL1 XFinalL1];
-    list_C_Ax_posicion_L1 = [list_C_Ax_posicion_L1; row];
-    fprintf('Iteration i: %d\n', i);
+for i = 292:450 %230,500
+    %[tPeriodoL1, XFinalL1,newAx] = periodicLyapunov(60,i,mu,L1,Ax,1e-4,false);
+    %C = jacobiConstant( XFinalL1(1,1:2),XFinalL1(1,3:4),mu)
+    %row = [newAx C tPeriodoL1 XFinalL1];
+    %list_C_Ax_posicion_L1 = [list_C_Ax_posicion_L1; row];
+    %fprintf('Iteration i: %d\n', i);
 end
 
  
@@ -33,13 +33,16 @@ Ax=1e-4;
 %[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(25,70,mu,L,Ax,1e-3,false);
 %[tFinalL2, XFinalL2] = periodicLyapunovL2(25,156,mu,L,Ax,1e-3,false);
 list_C_Ax_posicion_L2 = zeros(1,7);
-for i = 70:156
-    %[tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(25,i,mu,L2,Ax,1e-3,false);
-    %C = jacobiConstant( XFinalL2(1,1:2),XFinalL2(1,3:4),mu);
-    %row = [newAxL2 C tPeriodoL2 XFinalL2];
-    %list_C_Ax_posicion_L2 = [list_C_Ax_posicion_L2; row];
-    %fprintf('Iteration i: %d\n', i);
+for i = 200:300 %156
+    [tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(95,i,mu,L2,Ax,2e-4,false);
+    C = jacobiConstant( XFinalL2(1,1:2),XFinalL2(1,3:4),mu)
+    row = [newAxL2 C tPeriodoL2 XFinalL2];
+    list_C_Ax_posicion_L2 = [list_C_Ax_posicion_L2; row];
+    fprintf('Iteration i: %d\n', i);
+    if ~(mod(i,50))
+        save('savelist_C_Ax_posicion_L2_300.mat','list_C_Ax_posicion_L2');
+    end
 end
 
-%save('savelist_C_Ax_posicion_L2.mat','list_C_Ax_posicion_L2');
-%save('savelist_C_Ax_posicion_L1.mat','list_C_Ax_posicion_L1');
+
+%save('savelist_C_Ax_posicion_L1_316.mat','list_C_Ax_posicion_L1');

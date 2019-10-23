@@ -10,6 +10,7 @@ while Ax <= 0.4
 [t_halfPeriod,X_outVy,X_outX] = singleShootingLyapunov(mu,maxIter,Xguess, Vy_guess,printControl);
 Vy_guess = X_outVy;
 Ax = Ax + IncreasMag; %0.001
+%cambio
 Xguess = L - Ax;
 
 counter_1=counter_1+1;
@@ -19,7 +20,7 @@ if printControl
 end
     
 if counter_1 > maxIter2
-    new_Ax = Ax
+    new_Ax = Ax;
     break
 end
 

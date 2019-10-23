@@ -4,10 +4,10 @@ function [U2,U3] = poincareMap(function_name,X_mainfold,k,tLimit,mu)
 
 %% poincare map
 %U2 poincare section with y,Vy
-U2 = zeros(500,2);
+U2 = zeros(1,2);
 U2_counter = 1;
 %U3 poincare section with y,Vy
-U3 = zeros(500,2);
+U3 = zeros(1,2);
 U3_counter = 1;
 
 for n=1:k
@@ -25,8 +25,8 @@ for n=1:k
         %  y < 0; Vx > 0
         if( (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) < 0) & (X(i,3) > 0))
             %fprintf('toco surface: %d\n', 1)
-            U2(U2_counter,1) = X(i,2);
-            U2(U2_counter,2) = X(i,4);
+            row = [X(i,2) X(i,4)];
+            U2 = [U2;row];
             U2_counter = U2_counter + 1;
         end
 
@@ -34,8 +34,8 @@ for n=1:k
         % x = 1-mu; y > 0; Vx < 0
         if(  (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) > 0) & (X(i,3) < 0))
             %fprintf('toco surface: %d\n', 2)
-            U3(U3_counter,1) = X(i,2);
-            U3(U3_counter,2) = X(i,4);
+            row = [X(i,2) X(i,4)];
+            U3 = [U3;row];
             U3_counter = U3_counter + 1;
         end
     end

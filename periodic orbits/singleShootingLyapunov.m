@@ -8,12 +8,12 @@ X0 = [Xguess STM]';
 
 
 % Stop integrating when y=0 
-ode_options = odeset('Events',@limitCriteria,'RelTol',1e-14,'AbsTol',1e-14);
+ode_options = odeset('Events',@limitCriteria,'RelTol',1e-13,'AbsTol',1e-16);
 
 limit_criteria = 100;
 counter = 0;
 
-while abs(limit_criteria) > 1e-15
+while abs(limit_criteria) > 1e-16
     counter = counter+1;
     [t_halfOrbit,X_halfOrbit] = ode113(@CRTBPLyapunov, [0 Inf], X0, ode_options, mu);
     %[t,X_halfOrbit] = ode113(@cr3bpdiffV2, [0 Inf], X0, ode_options, mu);
@@ -23,7 +23,7 @@ while abs(limit_criteria) > 1e-15
         
     updateTerm = stm(3,4) - (1/X_halfOrbit(end,4))*stm(2,4);
 
-    deltaVec =  (1/updateTerm)*X_halfOrbit(end,3);
+    deltaVec = (1/updateTerm)*X_halfOrbit(end,3);
     
     
     deltaVy = [0, 0, 0, deltaVec]';
