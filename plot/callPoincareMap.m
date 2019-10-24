@@ -17,8 +17,8 @@ size(U2_stable_negative)
 
 plot(U2_unstable_positive((2:end),2), U2_unstable_positive((2:end),1),'b.')
 hold on
-plot(U2_stable_positive((2:end),2), U2_stable_positive((2:end),1),'r*')
-%plot(U3_stable((2:end),2), U3_stable((2:end),1),'r*')
+plot(U2_stable_positive((2:end),2), U2_stable_positive((2:end),1),'r.')
+%plot(U2_stable_negative((2:end),2), U2_stable_negative((2:end),1),'r.')
 xlabel('Vy')
 ylabel('y')
 

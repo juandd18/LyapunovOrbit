@@ -35,12 +35,12 @@ for n=1:k
 
         %poincare section U3 pag 114 Koon
         % x = 1-mu; y < 0; Vx < 0
-        %if(  (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) < 0)  & (X(i,4) < 0))
+        if(  (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) < 0)  & (X(i,4) < 0))
             %fprintf('toco surface: %d\n', 2)
-        %    row = [X(i,2) X(i,4)];
-        %    U2_negative = [U2_negative;row];
-        %    U3_counter = U3_counter + 1;
-        %end
+            row = [X(i,2) X(i,4)];
+            U2_negative = [U2_negative;row];
+            U3_counter = U3_counter + 1;
+        end
     end
 
 end

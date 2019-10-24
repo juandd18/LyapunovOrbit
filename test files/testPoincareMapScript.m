@@ -34,6 +34,6 @@ plotUnStableMainfold(X_mainfold_unstable,periodoUnstable,k,mu)
 hold off
 figure
 %% call poincare map
-[U2,U3] = callPoincareMap(X_mainfold_unstable,X_mainfold_stable,mu,k,10,10);
+[U2,U3] = callPoincareMap(X_mainfold_unstable,X_mainfold_stable,mu,k,15,10);
 
 
