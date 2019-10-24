@@ -22,9 +22,9 @@ Ax=1e-4;
 %[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(80,200,mu,L,Ax,3e-4,true);
 %C2 = jacobiConstant( XFinalL2(1,1:2),XFinalL2(1,3:4),mu);
 
-plot(L1_list((2:end),1),L1_list((2:end),2))
+plot(L1_list((2:end),1),L1_list((2:end),2),'r')
 hold on
-plot(L2_list((2:end),1),L2_list((2:end),2))
+plot(L2_list((2:end),1),L2_list((2:end),2),'b')
 
 
 %result = U2((2:end),:) == U3((2:end),:);

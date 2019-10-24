@@ -13,7 +13,7 @@ U3_counter = 1;
 for n=1:k
     
     x0=X_mainfold(n,1:4)';
-    options=odeset('RelTol',1e-13,'AbsTol',1e-13);
+    options=odeset('RelTol',1e-13,'AbsTol',1e-16);
     % añadir para parar cuando x = 1-mu  
     [t,X]=ode113(function_name,[0 tLimit],x0,options,mu);
     %get size of X

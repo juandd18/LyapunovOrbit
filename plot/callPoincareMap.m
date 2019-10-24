@@ -12,10 +12,13 @@ size(U3_unstable)
 
 size(U2_stable)
 size(U3_stable)
+
 %% plot poincare
-hold on
+
 plot(U2_unstable((2:end),1), U2_unstable((2:end),2),'b.')
-plot(U3_stable((2:end),1), U3_stable((2:end),2),'r*')
+hold on
+plot(U2_stable((2:end),1), U2_stable((2:end),2),'r*')
+%plot(U3_stable((2:end),1), U3_stable((2:end),2),'r*')
 xlabel('y')
 ylabel('Vy')
 
