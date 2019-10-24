@@ -6,33 +6,34 @@ mu = mMoon/(mMoon + mEarth);
 
 %% Unstable Manifold L1
 
-k = 80
+k = 200
 epsilon=1e-4;
 
-X0 = [0.797417447531649 0 0 0.373677867988008];
-C1 = jacobiConstant([0.797417447531649 0],[0 0.373677867988008],mu)
+X0 = [0.813517447531650 0 0 0.234489489311834];
+%3.1451
+C1 = jacobiConstant([0.813517447531650 0],[0 0.234489489311834],mu)
 STM = reshape(eye(4),16,[])';
 Xunstable = [X0 STM]';
 
-periodoUnstable = 3.41527940737424;
+periodoUnstable = 2.89665723647887;
 X_mainfold_unstable = calculateUnStableMainfold(periodoUnstable,Xunstable,mu,k,epsilon,false);
 
 %% stable manifold L2
 
-X0 = [1.20378035065113 0 0 -0.349555111713584];
-C1 = jacobiConstant([1.20378035065113 0],[0 -0.349555111713584],mu)
+X0 = [1.18638035065113 0 0 -0.198068281472250];
+C1 = jacobiConstant([1.18638035065113 0],[0 -0.198068281472250],mu)
 STM = reshape(eye(4),16,[])';
 Xstable = [X0 STM]';
-periodoStable = 3.78224404468083;
+periodoStable = 3.44846874965892;
 X_mainfold_stable = calculateStableMainfold(periodoStable,Xstable,mu,k,epsilon,false);
 
 %% test manifolds
 hold on 
-%plotStableMainfold(X_mainfold_stable,periodoStable,k,mu)
-%plotUnStableMainfold(X_mainfold_unstable,periodoUnstable,k,mu)
-%hold off
-
+plotStableMainfold(X_mainfold_stable,periodoStable,k,mu)
+plotUnStableMainfold(X_mainfold_unstable,periodoUnstable,k,mu)
+hold off
+figure
 %% call poincare map
-[U2,U3] = callPoincareMap(X_mainfold_unstable,X_mainfold_stable,mu,k,periodoStable*3,periodoUnstable*3);
+[U2,U3] = callPoincareMap(X_mainfold_unstable,X_mainfold_stable,mu,k,10,10);
 
 

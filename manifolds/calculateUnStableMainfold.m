@@ -8,7 +8,7 @@ function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,epsilon,plotGraph
 %generamos los manifolds
 
 %% generar la orbita periodica
-ode__opt = odeset('RelTol',1e-9,'AbsTol',1e-9);
+ode__opt = odeset('RelTol',1e-16,'AbsTol',1e-22);
 [t, X_periodica] = ode113(@CRTBPLyapunov, [0 periodo],X , ode__opt, mu); 
 num_steps = size(X_periodica,1);
 
