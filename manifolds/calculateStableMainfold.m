@@ -1,4 +1,4 @@
-function X_mainfold = calculateStableMainfold(periodo,X,mu,k,epsilon,plotGraph)
+function X_mainfold = calculateStableMainfold(periodo,X,mu,k,epsilon,signo,plotGraph)
 %calculateStableMainfold calcula el stable mainfold de una orbita
 %periodioca en este case lyapunov pero podria ser otra, se toma k puntos
 %para partir la orbita luego se calcula la matrix monodromy
@@ -20,7 +20,7 @@ mono = reshape(X_periodica(end,5:end),4,[]);
 mono_eigValues=diag(mono_eigVal);
 % en matlab organiza mono_eigVectors de acuerdo a la magnitud de los 
 %eigenvalues por esto el stable vector esta en la ultima posicion
-stableVector = -mono_eigVectors(1:4,4);
+stableVector = signo*mono_eigVectors(1:4,4);
 
 %% dividir la orbita periodica en k posiciones
 h=round((num_steps-1)/k);
@@ -46,7 +46,7 @@ end
 
 %if plotGraph is true we plot it
 if(plotGraph)
-plotStableMainfold(X_mainfold,periodo,k,mu)
+plotStableMainfold(X_mainfold,periodo,k,mu,'r')
 end
 
 

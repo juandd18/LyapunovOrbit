@@ -25,6 +25,21 @@ Ax=1e-4;
 plot(L1_list((2:end),1),L1_list((2:end),2),'r')
 hold on
 plot(L2_list((2:end),1),L2_list((2:end),2),'b')
+title('Constante de Jacobi vs Amplitud');
+xlabel('Amplitud ');
+ylabel('Constante de Jacobi ');
+grid on;
+
+figure
+
+plot(L1_list((2:end),3),L1_list((2:end),2),'r')
+hold on
+plot(L2_list((2:end),3),L2_list((2:end),2),'b')
+title('Constante de Jacobi vs Periodo');
+xlabel('Periodo ');
+ylabel('Constante de Jacobi ');
+grid on;
+
 
 
 %result = U2((2:end),:) == U3((2:end),:);

@@ -19,10 +19,10 @@ quintic3 = @(x) x^5 + (2+u)*x^4 + (1+2*u)*x^3 - (1-u)*x^2 - 2*(1-u)*x - (1-u);
 Dx_quintic3 = @(x) 5*x^4 + 4*(2+u)*x^3 + 3*(1+2*u)*x^2 - 2*(1-u) - 2*(1-u);
 x0 = 1 - (7/12)*u;
 x3 = newtonMethod(quintic3,Dx_quintic3,x0,3000,1e-15);
-L3 = vpa(u) + vpa(x3);
+L3 = u + x3;
 
 %cal L4
-L4x = vpa(1/2 - u);
+L4x = 1/2 - u;
 L4y = 3^(1/2)/2;
 
 %cal L5

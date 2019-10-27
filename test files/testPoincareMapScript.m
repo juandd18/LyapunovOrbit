@@ -25,12 +25,16 @@ C1 = jacobiConstant([1.18638035065113 0],[0 -0.198068281472250],mu)
 STM = reshape(eye(4),16,[])';
 Xstable = [X0 STM]';
 periodoStable = 3.44846874965892;
-X_mainfold_stable = calculateStableMainfold(periodoStable,Xstable,mu,k,epsilon,false);
+X_mainfold_stable = calculateStableMainfold(periodoStable,Xstable,mu,k,epsilon,-1,false);
 
 %% test manifolds
 hold on 
-plotStableMainfold(X_mainfold_stable,periodoStable,k,mu)
-plotUnStableMainfold(X_mainfold_unstable,periodoUnstable,k,mu)
+plotStableMainfold(X_mainfold_stable,periodoStable,k,mu,'r')
+plotUnStableMainfold(X_mainfold_unstable,periodoUnstable,k,mu,'b')
+title('Conexion heteroclinica entre campos invariantes');
+xlabel('X ');
+ylabel('Y ');
+grid on;
 hold off
 figure
 %% call poincare map
