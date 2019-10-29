@@ -6,21 +6,21 @@ mu = mMoon/(mMoon + mEarth);
 
 %% Unstable Manifold L1
 
-k = 500
-epsilon=1e-3;
+k = 250
+epsilon=1e-4;
 
-X0 = [0.813517447531650 0 0 0.234489489311834];
+X0 = [0.817517447531650 0 0 0.189885394719070];
 %3.1451
-C1 = jacobiConstant([0.813517447531650 0],[0 0.234489489311834],mu)
+C1 = jacobiConstant([0.817517447531650 0],[0 0.189885394719070],mu)
 STM = reshape(eye(4),16,[])';
 Xunstable = [X0 STM]';
 
-periodoUnstable = 2.89665723647887;
+periodoUnstable = 2.81697626060091;
 X_mainfold_unstable = calculateUnStableMainfold(periodoUnstable,Xunstable,mu,k,epsilon,1,false);
 
 %% stable manifold L2
 
-X0 = [1.18638035065113 0 0 -0.198068281472250];
+X0 = [1.17858035065113 0 0 -0.139265780297058];
 C2 = jacobiConstant([1.18638035065113 0],[0 -0.198068281472250],mu)
 STM = reshape(eye(4),16,[])';
 Xstable = [X0 STM]';

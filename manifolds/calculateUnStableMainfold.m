@@ -1,4 +1,4 @@
-function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,epsilon,plotGraph)
+function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,epsilon,signo,plotGraph)
 %calculateStableMainfold calcula el stable mainfold de una orbita
 %periodioca en este case lyapunov pero podria ser otra, se toma k puntos
 %para partir la orbita luego se calcula la matrix monodromy
@@ -8,7 +8,7 @@ function X_mainfold = calculateUnStableMainfold(periodo,X,mu,k,epsilon,plotGraph
 %generamos los manifolds
 
 %% generar la orbita periodica
-ode__opt = odeset('RelTol',1e-16,'AbsTol',1e-22);
+ode__opt = odeset('RelTol',1e-13,'AbsTol',1e-14);
 [t, X_periodica] = ode113(@CRTBPLyapunov, [0 periodo],X , ode__opt, mu); 
 num_steps = size(X_periodica,1);
 
@@ -21,7 +21,7 @@ mono = reshape(X_periodica(end,5:end),4,[]);
 mono_eigValues=diag(mono_eigVal);
 % en matlab organiza mono_eigVectors de acuerdo a la magnitud de los 
 %eigenvalues por esto el unstable vector esta en la primera posicion
-UnstableVector = mono_eigVectors(1:4,1);
+UnstableVector = signo*mono_eigVectors(1:4,1);
 
 %% dividir la orbita periodica en k posiciones
 % cambiar num_steps por numero filas de X_periodica
