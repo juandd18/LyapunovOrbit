@@ -9,7 +9,7 @@ L2 = -L2
 L = L1;
 Ax=1e-4;
 
-%[tFinalL1, XFinalL1,newAxL1] = periodicLyapunov(100,75,mu,L1,Ax,1e-4,true);
+%[tFinalL1, XFinalL1,newAxL1] = periodicLyapunov(90,200,mu,L1,Ax,1e-4,true);
 %[tFinalL1, XFinalL1,newAxL1] = periodicLyapunov(60,450,mu,L1,Ax,1e-4,true);
 %[tFinalL1, XFinalL1,newAx] = periodicLyapunov(25,45,mu,L1,Ax,5e-4,true);
 %C = jacobiConstant( XFinalL1(1,1:2),XFinalL1(1,3:4),mu)
@@ -17,28 +17,28 @@ Ax=1e-4;
 
 L = L2; 
 Ax=1e-4;
-%[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(95,105,mu,L,Ax,1e-4,true);
+%[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(90,150,mu,L,Ax,2e-4,true);
 %[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(95,121,mu,L,Ax,3e-4,true);
 %[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(80,200,mu,L,Ax,3e-4,true);
 %C2 = jacobiConstant( XFinalL2(1,1:2),XFinalL2(1,3:4),mu);
 
-plot(L1_list((2:end),1),L1_list((2:end),2),'r')
-hold on
-plot(L2_list((2:end),1),L2_list((2:end),2),'b')
-title('Constante de Jacobi vs Amplitud');
-xlabel('Amplitud ');
-ylabel('Constante de Jacobi ');
-grid on;
+%plot(L1_list((2:end),1),L1_list((2:end),2),'r')
+%hold on
+%plot(L2_list((2:end),1),L2_list((2:end),2),'b')
+%title('Constante de Jacobi vs Amplitud');
+%xlabel('Amplitud ');
+%ylabel('Constante de Jacobi ');
+%grid on;
 
-figure
+%figure
 
-plot(L1_list((2:end),3),L1_list((2:end),2),'r')
-hold on
-plot(L2_list((2:end),3),L2_list((2:end),2),'b')
-title('Constante de Jacobi vs Periodo');
-xlabel('Periodo ');
-ylabel('Constante de Jacobi ');
-grid on;
+%plot(L1_list((2:end),3),L1_list((2:end),2),'r')
+%hold on
+%plot(L2_list((2:end),3),L2_list((2:end),2),'b')
+%title('Constante de Jacobi vs Periodo');
+%xlabel('Periodo ');
+%ylabel('Constante de Jacobi ');
+%grid on;
 
 
 

@@ -21,7 +21,7 @@ X_mainfold_unstable = calculateUnStableMainfold(periodoUnstable,Xunstable,mu,k,e
 %% stable manifold L2
 
 X0 = [1.18638035065113 0 0 -0.198068281472250];
-C1 = jacobiConstant([1.18638035065113 0],[0 -0.198068281472250],mu)
+C2 = jacobiConstant([1.18638035065113 0],[0 -0.198068281472250],mu)
 STM = reshape(eye(4),16,[])';
 Xstable = [X0 STM]';
 periodoStable = 3.44846874965892;
@@ -38,6 +38,6 @@ grid on;
 hold off
 figure
 %% call poincare map
-[U2,U3] = callPoincareMap(X_mainfold_unstable,X_mainfold_stable,mu,k,15,10);
+[U2,U3] = callPoincareMap(X_mainfold_unstable,X_mainfold_stable,mu,k,C1,periodoStable,periodoUnstable);
 
 

@@ -1,4 +1,4 @@
-function [U2_positive,U2_negative] = poincareMap(function_name,X_mainfold,k,tLimit,mu)
+function [U2_positive,U2_negative] = poincareMap(function_name,X_mainfold,k,tLimit,mu,C)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -13,7 +13,7 @@ U3_counter = 1;
 for n=1:k
     
     x0=X_mainfold(n,1:4)';
-    options=odeset('RelTol',1e-13,'AbsTol',1e-16);
+    options=odeset('Events',@limitCriteriaPoincare,'RelTol',1e-13,'AbsTol',1e-18);
     % añadir para parar cuando x = 1-mu  
     [t,X]=ode113(function_name,[0 tLimit],x0,options,mu);
     %get size of X
@@ -26,7 +26,14 @@ for n=1:k
         % if( (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) < 0) & (X(i,3) > 0))
         %  y < 0; Vy > 0
         % +- section
-        if( (X(i-1,1) < (1-mu) & (X(i,1) > (1-mu))) & (X(i,2) < 0) )
+        
+        r1_i = sqrt((X(i,1)+mu)^2 + X(i,2)^2);
+        r2_i = sqrt((X(i,1)+mu-1)^2 + X(i,2)^2);
+        
+        % Vx
+        Vx_i = sqrt( -X(i,3)^2 + X(i,1)^2 + X(i,2)^2 + (2*(1-mu))./r1_i + (2*mu)./r2_i + 2*C );
+        
+        if(  (X(i,2) < 0) & Vx_i > 0 )
             %fprintf('toco surface: %d\n', 1)
             row = [X(i,2) X(i,4)];
             U2_positive = [U2_positive;row];
