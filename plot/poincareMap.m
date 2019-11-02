@@ -1,4 +1,4 @@
-function [U2_positive,U2_negative] = poincareMap(function_name,X_mainfold,k,tLimit,mu,C)
+function [U2_positive] = poincareMap(function_name,X_mainfold,k,tLimit,mu,C)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -6,14 +6,11 @@ function [U2_positive,U2_negative] = poincareMap(function_name,X_mainfold,k,tLim
 %U2 poincare section with y,Vy
 U2_positive = zeros(1,3);
 U2_counter = 1;
-%U3 poincare section with y,Vy
-U2_negative = zeros(1,3);
-U3_counter = 1;
 
 for n=1:k
     
     x0=X_mainfold(n,1:4)';
-    options=odeset('Events',@limitCriteriaPoincare,'RelTol',1e-12,'AbsTol',1e-14);
+    options=odeset('Events',@limitCriteriaPoincare,'RelTol',1e-13,'AbsTol',1e-22);
     % añadir para parar cuando x = 1-mu  
     [t,X]=ode113(function_name,[0 tLimit],x0,options,mu);
     %get size of X
@@ -26,15 +23,21 @@ for n=1:k
         %  y < 0; Vy > 0
         % +- section
         
-        r1_i = sqrt((X(end,1)+mu)^2 + X(end,2)^2);
-        r2_i = sqrt((X(end,1)+mu-1)^2 + X(end,2)^2);
-        
+        u1 = 1-mu;
+        u2=mu;
+        x = 1-mu;
+        y = X(end,2);
+        Vy = X(end,4);
+        r1_i = sqrt((x+u2)^2 + y^2);
+        r2_i = sqrt((x-u1)^2 + y^2);
+
+        U= -(x^2 + y^2)/2 - (u1)/r1_i - (u2)/r2_i - (u1*u2)/2;
         % Vx
-        Vx_i = sqrt( -X(end,3)^2 + X(end,1)^2 + X(end,2)^2 + (2*(1-mu))./r1_i + (2*mu)./r2_i + 2*C );
+        Vx_i = sqrt( -(Vy^2) - 2*U  - C );
         
-        if(  (X(end,2) < 0) )
+        if(  (X(end,2) < 0) & (Vx_i > 0) )
             %fprintf('toco surface: %d\n', 1)
-            row = [X(end,2) X(end,4) Vx_i ];
+            row = [X(end,2) X(end,4) X(end,3)];
             U2_positive = [U2_positive;row];
             U2_counter = U2_counter + 1;
         end
