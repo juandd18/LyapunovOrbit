@@ -13,10 +13,10 @@ C = 3.094618
 
 
 x= 1-mu
-y= -0.148281363388881 %-0.00915951502265754 
-Vy = 0.141839359931402 %0.084007456142864 
+y= -0.148298
+Vy = 0.141804
 
-Vx_i = 0.08550 %1.5808029430961
+Vx_i = 0.08545284
 r1_i = sqrt((x+u2)^2 + y^2);
 r2_i = sqrt((x-u1)^2 + y^2);
 
@@ -28,20 +28,20 @@ U= -(x^2 + y^2)/2 - (u1)/r1_i - (u2)/r2_i - (u1*u2)/2;
 Vx_it = sqrt( -(Vy)^2 - 2*U  - C )
 
         
-X = [x y Vx_i Vy]
+X = [x y Vx_i Vy];
 %X = [0.987849886237367 -0.147193198313387 0.0433317948808526 -0.129650344384800]
 
 ode__opt = odeset('RelTol',1e-13,'AbsTol',1e-22);
 numSteps=500;
 tspan=linspace(0, 10,numSteps);
-[t,X_forward]=ode113(@CRTBPForward,[0,4.48],X,ode__opt,mu);
+[t,X_forward]=ode113(@CRTBPForward,[0,4.7],X,ode__opt,mu);
 
-y= -0.148281 %-0.148281363388881  
-Vy= 0.141839 %0.141839359931402 
-Vx_i2 = 0.08549 
-X = [x y Vx_i2 Vy]
+y= -0.148298042463896
+Vy= 0.14180
+Vx_i2 = 0.08545284  %0,085478408543951
+X = [x y Vx_i2 Vy];
 
-[t,X_backward]=ode113(@CRTBPBackward,[0 4.435],X,ode__opt,mu);
+[t,X_backward]=ode113(@CRTBPBackward,[0 4.27],X,ode__opt,mu);
 
 %% plot all
 figure
