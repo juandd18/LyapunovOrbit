@@ -1,6 +1,6 @@
 function [vectOutput] = CRTBPForward(time,vect,mu)
-%UNTITLED6 Summary of this function goes here
-%   Detailed explanation goes here
+%CRTBPForward equation of motion for a PCRTBP using 
+%   
 
 %% Positions
 x = vect(1);
