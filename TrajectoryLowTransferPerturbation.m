@@ -12,7 +12,7 @@ u2=mu;
 C = 3.094618
 
 %% parameters perturbation
-e = 0.4
+e = 0.9
 Cr= 1 + e
 Area= 110.5
 mass= 8000.0
@@ -20,8 +20,8 @@ mass= 8000.0
 Ap = 1e-4%rand(1)
 theta = 2*pi*1e-4% rand(1)
 
-checkPertSolar = false
-checkPertRandom = true
+checkPertSolar = true
+checkPertRandom = false
 
 %% parameter orbit unstable
 
