@@ -17,8 +17,11 @@ Cr= 1 + e
 Area= 110.5
 mass= 8000.0
 
-Ap = 0.000001%rand(1)
-theta = 2*pi*0.000001% rand(1)
+Ap = 1e-4%rand(1)
+theta = 2*pi*1e-4% rand(1)
+
+checkPertSolar = false
+checkPertRandom = true
 
 %% parameter orbit unstable
 
@@ -45,18 +48,21 @@ X = [x y Vx_i Vy]
 
 ode__opt = odeset('RelTol',1e-13,'AbsTol',1e-22);
 numSteps=500;
-tspan=linspace(0, 10,numSteps);
-[t,X_forward]=ode113(@CRTBPForwardPerturbation,[0,5.8],X,ode__opt,mu,Ap,theta,Cr,Area,mass);
-
+tspan=linspace(0, 4.7,numSteps);
+[t,X_forward]=ode113(@CRTBPForwardPerturbation,tspan,X,ode__opt,mu,Ap,theta,Cr,Area,mass,checkPertSolar,checkPertRandom);
+save('lowEnergyForward_Perturbed.mat','X_forward');
+%save('lowEnergyForward.mat','X_forward');
 
 %% back perturbation
 
-y= -0.148281363388881  
-Vy= 0.141839359931402 
+y= -0.148280832631322 %-0.148281363388881  
+Vy= 0.141841295804242
 Vx_i2 = 0.0854973171257835
 X = [x y Vx_i2 Vy]
 
-[t,X_backward]=ode113(@CRTBPBackwardPerturbation,[0 5.8],X,ode__opt,mu,Ap,theta,Cr,Area,mass);
+[t,X_backward]=ode113(@CRTBPBackwardPerturbation,tspan,X,ode__opt,mu,Ap,theta,Cr,Area,mass,checkPertSolar,checkPertRandom);
+save('lowEnergyBackward_Perturbed.mat','X_backward');
+%save('lowEnergyBackward.mat','X_backward');
 
 %% plot all
 figure

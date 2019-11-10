@@ -28,7 +28,7 @@ pgon2 = polyshape(U2_stable_positive((2:end),2),U2_stable_positive((2:end),1));
 
 plot(intersect(pgon1,pgon2),'EdgeColor','none')
 
-title('Mapa de Poincare entre campos invariantes');
+title('Aplicaciones de Poincare entre campos invariantes de L1 y L2');
 grid on;
 xlabel('Vy')
 ylabel('y')
@@ -38,7 +38,10 @@ figure
 plot(U2_unstable_positive((2:end),2), U2_unstable_positive((2:end),1),'b.')
 hold on
 plot(U2_stable_positive((2:end),2), U2_stable_positive((2:end),1),'r.')
-
+title('Aplicaciones de Poincare entre campos invariantes de L1 y L2');
+grid on;
+xlabel('Vy')
+ylabel('y')
 
 end
 

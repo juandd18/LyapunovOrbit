@@ -1,4 +1,4 @@
-function [vectOutput] = CRTBPForwardPerturbation(time,vect,mu,Ap,theta,Cr,Area,mass)
+function [vectOutput] = CRTBPForwardPerturbation(time,vect,mu,Ap,theta,Cr,Area,mass,checkPertSolar,checkPertRandom)
 %CRTBPForward equation of motion for a PCRTBP using 
 %   
 
@@ -19,14 +19,17 @@ xAce = 2*yVel + x - ((1-mu)*(x+mu))/(r1^3) - (mu*(x-1+mu))/r2^3;
 yAce = -2*xVel + y - ((1-mu)*y)/r1^3  - (mu*y)/r2^3;
 
 %% Accelerations with Random Perturbation 
+if(checkPertRandom)
 AccRandom = randomPerturbation(Ap,theta);
-
+xAce  = xAce + AccRandom(1,1) ;
+yAce  = yAce + AccRandom(1,2) ;
+end
 %% Accelarations with Solar Radiation Perturbation
+if(checkPertSolar)
 AccSolar =SolarPresion([x y],time,Cr,Area,mass);
-
-%% Add perturbation to current accelerations
-xAce  = xAce + AccRandom(1,1) + AccSolar(1,1);
-yAce  = yAce + AccRandom(1,2) + AccSolar(1,2);
+xAce  = xAce +  AccSolar(1,1);
+yAce  = yAce + AccSolar(1,2);
+end
 
 
 vectOutput = [xVel yVel xAce yAce]';

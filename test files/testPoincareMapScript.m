@@ -6,7 +6,7 @@ mu = mMoon/(mMoon + mEarth);
 
 %% Unstable Manifold L1
 
-k = 10000
+k = 5000
 epsilon=1e-7;
 
 %[0.803317447531650 0 0 0.333418984453424]
@@ -36,7 +36,8 @@ epsilon=1e-6;
 hold on 
 plotStableMainfold(X_mainfold_stable,periodoStable*5,k,mu,'r')
 plotUnStableMainfold(X_mainfold_unstable,periodoUnstable*5,k,mu,'b')
-title('Conexion heteroclinica entre campos invariantes');
+plot([1-mu 1-mu],[-0.2 0.2],'k','LineWidth',3)
+title('Variedades Invariantes sobre las Orbitas Lyapunov');
 xlabel('X ');
 ylabel('Y ');
 grid on;

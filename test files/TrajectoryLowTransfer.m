@@ -48,5 +48,8 @@ figure
 hold on
 
 line(X_forward(:,1), X_forward(:,2),'Color','b')
-
 line(X_backward(:,1), X_backward(:,2),'Color','r')
+title('Trayectoria de baja energia entre orbitas periódicas Lyapunov');
+grid on;
+xlabel('x')
+ylabel('y')
