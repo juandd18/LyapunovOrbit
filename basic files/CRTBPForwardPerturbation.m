@@ -20,7 +20,7 @@ yAce = -2*xVel + y - ((1-mu)*y)/r1^3  - (mu*y)/r2^3;
 
 %% Accelerations with Random Perturbation 
 if(checkPertRandom)
-AccRandom = randomPerturbation(Ap,theta);
+AccRandom = randomPerturbation(Ap);
 xAce  = xAce + AccRandom(1,1) ;
 yAce  = yAce + AccRandom(1,2) ;
 end

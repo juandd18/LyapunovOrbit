@@ -22,9 +22,9 @@ end
 % y_eq_stable = stable_manifold_end(lo,:);
 % y_eq_unstable = unstable_manifold_end(Loci(lo),:);
 
-[lo , ii] = ismembertol(stable_manifold_end(:,4),unstable_manifold_end(:,4),1e-6);
-Vy_eq_stable = stable_manifold_end(lo,:);
-Vy_eq_unstable = unstable_manifold_end(ii(lo),:);
+% [lo , ii] = ismembertol(stable_manifold_end(:,4),unstable_manifold_end(:,4),1e-6);
+% Vy_eq_stable = stable_manifold_end(lo,:);
+% Vy_eq_unstable = unstable_manifold_end(ii(lo),:);
 
 % [lo , Loci] = ismembertol(stable_manifold_end(:,2:4),unstable_manifold_end(:,2:4),1e-3,'ByRows', true);
 % y_eq_stable = stable_manifold_end(lo,:);

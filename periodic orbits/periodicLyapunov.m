@@ -1,4 +1,4 @@
-function [tPeriodo,Xtemp,new_Ax] = periodicLyapunov(maxIter,maxIter2,mu,L,Ax,IncreasMag,printControl)
+function [tPeriodo,Xtemp,new_Ax] = periodicLyapunov(maxIter,maxIter2,mu,L,Ax,IncreasMag,printControl,color)
 %periodicLyapunov calculate the periodic lyapunov orbit
 
 
@@ -28,7 +28,8 @@ end
 
 
 Xtemp = [X_outX,0,0,Vy_guess];
-tPeriodo = plotPeriodicOrbit(Xtemp,t_halfPeriod(end)*2,mu,L);
+hold all
+tPeriodo = plotPeriodicOrbit(Xtemp,t_halfPeriod(end)*2,mu,L,color);
 
 
 end
