@@ -1,7 +1,6 @@
-function accRandom = randomPerturbation(Ap)
+function accRandom = randomPerturbation(Ap,theta)
 %randomPerturbation Calcula una perturbacion aleatoria
 
-theta = 2*pi*rand;
 ax = Ap*cos(theta);
 ay = Ap*sin(theta);
 
