@@ -68,7 +68,7 @@ end
 
 %if plotGraph is true we plot it
 if(plotGraph)
-plotUnStableMainfold(X_mainfold,periodo*30,k,mu,'r')
+plotUnStableMainfold(X_mainfold,periodo*2,k,mu,'r')
 end
 
 end

@@ -7,7 +7,7 @@ function [tPeriodo,Xtemp,new_Ax] = periodicLyapunov(maxIter,maxIter2,mu,L,Ax,Inc
 counter_1 = 0;
 while Ax <= 0.4
     
-[t_halfPeriod,X_outVy,X_outX] = singleShootingLyapunov(mu,maxIter,Xguess, Vy_guess,printControl);
+[t_halfPeriod,X_outVy,X_outX] = singleShootingLyapunov(mu,maxIter,Xguess, Vy_guess,false);
 Vy_guess = X_outVy;
 Ax = Ax + IncreasMag; %0.001
 %cambio

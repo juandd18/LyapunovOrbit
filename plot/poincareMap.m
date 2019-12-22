@@ -4,7 +4,7 @@ function [U2_positive] = poincareMap(function_name,X_mainfold,k,tLimit,mu,C)
 
 %% poincare map
 %U2 poincare section with y,Vy
-U2_positive = zeros(1,3);
+U2_positive = zeros(1,6);
 U2_counter = 1;
 
 for n=1:k
@@ -31,13 +31,16 @@ for n=1:k
         r1_i = sqrt((x+u2)^2 + y^2);
         r2_i = sqrt((x-u1)^2 + y^2);
 
-        U= -(x^2 + y^2)/2 - (u1)/r1_i - (u2)/r2_i - (u1*u2)/2;
+        %U= -(x^2 + y^2)/2 - (u1)/r1_i - (u2)/r2_i - (u1*u2)/2;
+        U= -(u1*(r1_i^2) + u2*(r2_i^2))/2 - (u1)/r1_i - (u2)/r2_i;
         % Vx
         Vx_i = sqrt( -(Vy^2) - 2*U  - C );
         
-        if(  (X(end,2) < 0) & (Vx_i > 0) )
+        if(  (X(end,2) < 0) &   (Vx_i > 0) )  %X(end,3) > 0)
             %fprintf('toco surface: %d\n', 1)
-            row = [X(end,2) X(end,4) X(end,3)];
+            C1 = jacobiConstant( [1-mu X(end,2)],X(end,3:4),mu);
+            C2 = jacobiConstant( [1-mu X(end,2)],[Vx_i X(end,4)],mu);
+            row = [X(end,2) X(end,4) Vx_i X(end,3) C1 C2];
             U2_positive = [U2_positive;row];
             U2_counter = U2_counter + 1;
         end

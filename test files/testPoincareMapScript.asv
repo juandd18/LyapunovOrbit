@@ -6,7 +6,7 @@ mu = mMoon/(mMoon + mEarth);
 
 %% Unstable Manifold L1
 
-k = 5000;
+k = 2000;
 epsilon=1e-6;
 
 %[0.803317447531650 0 0 0.333418984453424]  v1
@@ -55,7 +55,7 @@ figure
 [lo , ii] = ismembertol(U2(:,1),U3(:,1),0.00001);
 y_eq_stable = U2(lo,:);
 y_eq_unstable = U3(ii(lo),:);
-[lo , ii] = ismembertol(abs(U2(:,2)),abs(U3(:,2)),0.0000001);
+[lo , ii] = ismembertol(U2(:,2),U3(:,2),0.000001);
 Vy_eq_stable = U2(lo,:);
 Vy_eq_unstable = U3(ii(lo),:);
 
