@@ -28,7 +28,7 @@ Ax=1e-3;
 %844        c=3.1354
 %847        c=3.1348
 % list_C_Ax_posicion_L1 = zeros(1,8);
-% for i = 866:880 %75:80 % 95:110%280:285%41:51%100:105 %230,500
+% for i = 855:865 %75:80 % 95:110%280:285%41:51%100:105 %230,500
 %     %[tPeriodoL1, XFinalL1,newAx] = periodicLyapunov(70,i,mu,L1,Ax,2e-4,false);
 %     %[tPeriodoL1, XFinalL1,newAx] = periodicLyapunov(30,i,mu,L,Ax,1e-3,false,'red');
 %     %[tPeriodoL1, XFinalL1,newAx] = periodicLyapunov(55,i,mu,L1,1e-4,3e-5,false,'red');
@@ -65,21 +65,20 @@ Ax=1e-5;
 %1109     c:3.1372
 %1112     c:3.1369
 %1164     c:3.1314
-list_C_Ax_posicion_L2 = zeros(1,8);
-for i =  330:450% 50:55 %383:390%1100:1800 %156
-%     [tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(55,i,mu,L2,Ax,1e-5,false);
-    %[tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(60,i,mu,L,1e-4,1e-4,false,'blue');
-    %[tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(65,i,mu,L,Ax,3e-5,true,'blue');
-    [tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(70,i,mu,L,1e-4,1e-4,true,'blue');
-    C = jacobiConstant( XFinalL2(1,1:2),XFinalL2(1,3:4),mu)
-    row = [newAxL2 C tPeriodoL2 XFinalL2 i];
-    list_C_Ax_posicion_L2 = [list_C_Ax_posicion_L2; row];
-    fprintf('Iteration i: %d\n', i);
-    if ~(mod(i,10))
-       save('version_6_L2.mat','list_C_Ax_posicion_L2');
-    end
-end
-save('version_6_L2.mat','list_C_Ax_posicion_L2');
+% list_C_Ax_posicion_L2 = zeros(1,8);
+% for i =  1148:1170% 50:55 %383:390%1100:1800 %156
+% %     [tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(55,i,mu,L2,Ax,1e-5,false);
+%     %[tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(60,i,mu,L,1e-4,1e-4,false,'blue');
+%     [tPeriodoL2, XFinalL2,newAxL2] = periodicLyapunovL2(65,i,mu,L,Ax,3e-5,true,'blue');
+%     C = jacobiConstant( XFinalL2(1,1:2),XFinalL2(1,3:4),mu)
+%     row = [newAxL2 C tPeriodoL2 XFinalL2 i];
+%     list_C_Ax_posicion_L2 = [list_C_Ax_posicion_L2; row];
+%     fprintf('Iteration i: %d\n', i);
+%     if ~(mod(i,10))
+%        save('version_5_L2.mat','list_C_Ax_posicion_L2');
+%     end
+% end
+% save('version_5_L2.mat','list_C_Ax_posicion_L2');
 % %figure
 % plot(list_C_Ax_posicion_L2((2:end),1),list_C_Ax_posicion_L2((2:end),2),'b')
 

@@ -6,20 +6,27 @@ mu = mMoon/(mMoon + mEarth);
 
 %% Unstable Manifold L1
 
-k = 5000;
+%k = 5000;
+k = 500;
 epsilon=1e-6;
 
 %[0.803317447531650 0 0 0.333418984453424]  v1
 %[3.094618]  v1
 % 3.205884 periodo v1
 
-X0 = [0.811257447531650 0 0 0.259076017891584];
+%X0 = [0.811257447531650 0 0 0.259076017891584]; v2
+%2.95350667318255; periodo v2
+
+%X0 = [0.811797447531650 0 0 0.253286618388156]; v3
+%2.93916351758083; periodo v3
+
+X0 = [0.814077447531650 0 0 0.228283753083949];
 
 C1 = jacobiConstant(X0(1,1:2),X0(1,3:4),mu)
 STM = reshape(eye(4),16,[])';
 Xunstable = [X0 STM]';
 
-periodoUnstable = 2.95350667318255;
+periodoUnstable = [2.88388989737548];
 [X_mainfold_unstable,UnstableVector] = calculateUnStableMainfold(periodoUnstable,Xunstable,mu,k,epsilon,1,false);
 
 %% stable manifold L2
@@ -28,13 +35,19 @@ periodoUnstable = 2.95350667318255;
 %[3.094618]  v1
 %3.63716374726546 periodo v1
 
-X0 = [1.18986035065113	0	0	-0.227318985869281];
+%X0 = [1.18986035065113	0	0	-0.227318985869281]; v2
+%3.48057698438254 periodo v2
+
+%X0 = [1.18908035065113 0 0 -0.220586146027427]; v3
+%3.47240464793725 periodo v3
+
+X0 = [1.19568 0 0 -0.280120];
 C2 = jacobiConstant(X0(1,1:2),X0(1,3:4),mu)
 
 STM = reshape(eye(4),16,[])';
 Xstable = [X0 STM]';
 
-periodoStable = 3.48057698438254;
+periodoStable = [3.56749513627359];
 epsilon=1e-6;
 [X_mainfold_stable,stableVector] = calculateStableMainfold(periodoStable,Xstable,mu,k,epsilon,-1,false);
 

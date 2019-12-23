@@ -27,7 +27,7 @@ Ax=1e-4;
 
 L = L2; 
 Ax=1e-5;
-%[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(65,950,mu,L,Ax,3e-5,true,'blue');
+% [tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(60,300,mu,L,Ax,3e-5,true,'blue');
 % 3.1471 ; 1000
 %3.1778 ; 400
 %3.1604; 800
@@ -36,8 +36,8 @@ Ax=1e-5;
 %33.171179766161216 800
 % 3.177788445486213 109
 
-%Ax=1e-4;
-%[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(95,151,mu,L,Ax,1e-4,true);
+Ax=1e-4;
+[tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(65,330,mu,L,Ax,1e-4,true,'blue');
 %3.172155835148665 150
 %3.172066658851451
 % [tFinalL2, XFinalL2,newAxL2] = periodicLyapunovL2(80,200,mu,L,Ax,3e-4,true,'blue');
