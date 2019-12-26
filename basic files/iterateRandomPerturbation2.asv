@@ -1,9 +1,9 @@
-function [concat_lastPoint,concat_numPoints,X_forward_perturbed] = iterateRandomPerturbation(n,Ap,X,mu,X_lastPoint,numSteps)
+function [concat_lastPoint,concat_numPoints,X_forward_perturbed] = iterateRandomPerturbation2(n,Ap,X_1,X_2,mu,X_lastPoint,numSteps)
 %iterateRandomPerturbation iterates n times taking an acceleration 
 %randomly taking angle theta
 
 ode__opt = odeset('RelTol',1e-13,'AbsTol',1e-14);
-tspan=linspace(0, 9,numSteps);
+tspan=linspace(0, 4,numSteps);
 
 concat_lastPoint = [];
 concat_numPoints = [];
@@ -22,7 +22,10 @@ iter=1;
 for c = 1:n
     theta_rand = (2*pi-1).*rand(20,1) + 1;
     theta_idx = 1:20;
-    [t,X_forward_perturbed]=ode113(@CRTBPForwardPerturbation,tspan,X,ode__opt,mu,Ap,theta_rand,theta_idx,0,0,0,0,true);
+    [t,X_forward_perturbed]=ode113(@CRTBPForwardPerturbation,tspan,X_1,ode__opt,mu,Ap,theta_rand,theta_idx,0,0,0,0,true);
+    
+    [t,X_forward_perturbed]=ode113(@CRTBPForwardPerturbation,tspan,X_1,ode__opt,mu,Ap,theta_rand,theta_idx,0,0,0,0,true);
+    
     X_lastPoint_NoPerturbed = abs(X_lastPoint - X_forward_perturbed(end,:));
     concat_lastPoint = [concat_lastPoint;X_lastPoint_NoPerturbed];
     

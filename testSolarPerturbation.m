@@ -11,10 +11,11 @@ u1 = 1-mu;
 u2=mu;
 C = 3.094618
 
+% intial point from trajectoryLowTransfer2
 X = [0.907161597118030 0.0841789206619423 -0.0324212073604759 -0.298181675795112]
 
 %% parameters perturbation
-e = 0.9
+e = 0.90
 Cr= 1 + e
 Area= 110.5
 mass= 8000.0
@@ -41,7 +42,7 @@ tspan=linspace(0, 8.5,numSteps);
 
 ode__opt = odeset('RelTol',1e-13,'AbsTol',1e-14);
 
-tspan=linspace(0, 8,numSteps);
+tspan=linspace(0, 8.5,numSteps);
 [t,X_forward_perturbed]=ode113(@CRTBPForwardPerturbation,tspan,X,ode__opt,mu,Ap,theta_rand,theta_idx,Cr,Area,mass,checkPertSolar,checkPertRandom);
 %numSteps=499;
 %[t,X_forward_perturbed]=rk_4orden(@CRTBPForwardPerturbation,0,9,X,numSteps,mu,Ap,Cr,Area,mass,checkPertSolar,checkPertRandom);
@@ -50,6 +51,9 @@ tspan=linspace(0, 8,numSteps);
 %% difference all orbit between no pertubed orbit and perturbed orbit
 diff_orbit = abs(X_forward_NoPerturbed - X_forward_perturbed);
 mean_diff = mean(diff_orbit)
+std_diff= std(diff_orbit)
+var_diff = var(diff_orbit)
+
 
 %% difference last point between no pertubed orbit and perturbed orbit
 last_point_diff_orbit = abs(X_forward_NoPerturbed(end,:) - X_forward_perturbed(end,:))
